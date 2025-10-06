@@ -27,30 +27,19 @@
 
 ## 部署
 ### 售票机
-- 编辑 `startup.lua` 中的 `CURRENT_STATION_CODE`
-- 摆放相关外设；如使用中心服务器，配置 `API_ENDPOINT.txt`
+- 运行`install_machine.lua`
+- 填写车站编号、车站名称、API路径
 
 ### 闸机
-- 编辑 `gate.lua` 中 `CURRENT_STATION_CODE` 与 `GATE_TYPE`（0=进站，1=出站）
-- 摆放相关外设并接好门控红石
-
-### 控制台
-- 安装依赖并启动服务；可在 `web/data/*.json` 或界面中管理数据
+- 运行`install_gate.lua`
+- 填写填写车站编号、选择闸机类型、API路径
 
 ## 使用
 - 售票：选择站点、类型与次数，支付后进入打印检查，随后打印并写盘
 - 验票：插入软盘后自动校验并开门；多程票在扣次并更新后自动弹盘
 - 控制台：管理基本数据；在区间 Shift-点击可插入站点
 
-## 开发建议
-- 注释保持英文、简洁；Lua 外设调用建议加 `pcall`
-- Web API 路由在 `/api`，持久化文件位于 `web/data/*`
-
-## 贡献
-- 欢迎提 Issue 与 PR；改动尽量聚焦且最小化，遵循现有风格
-
-## 许可证
-- 使用 MIT 许可；详见 `LICENSE`
+---
 
 ## 安装与运行
 
@@ -71,12 +60,3 @@
 
 **数据导入/导出**
 - 在控制台界面使用“导入数据 / 导出数据”按钮；导出文件名为 `ftc-ticket-admin-backup.json`。
-
-**设备部署（CC:Tweaked）**
-- 售票机：将 `Lua/TicketMachine/startup.lua` 置于电脑根目录作为开机自启，配置 `CURRENT_STATION_CODE`；按需摆放监视器、音响、打印机、软盘驱动器。
-- 闸机：将 `Lua/TicketMachine/gate.lua` 部署到闸机电脑，设置 `CURRENT_STATION_CODE` 与 `GATE_TYPE`（0=进站，1=出站），接好门控红石。
-- 若使用中心服务器：在设备侧写入 API 基址（如通过 `API_ENDPOINT.txt` 或程序内配置）。
-
-**常见问题**
-- 端口被占用：以 `PORT=8080 node web/server.js` 方式指定端口。
-- 跨域访问：后端已启用 CORS；如需跨源部署，请正确设置 `api_base`。
