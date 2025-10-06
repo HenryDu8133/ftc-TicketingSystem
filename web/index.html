@@ -1,0 +1,220 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ftc铁路运输票务系统 · 控制台</title>
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body>
+  <header class="brand">
+    <div class="brand-title">ftc铁路运输票务系统 · 控制台</div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="dashboard">仪表盘</button>
+      <button class="tab" data-tab="tickets">票务管理</button>
+      <button class="tab" data-tab="ticketlog">车票日志</button>
+      <button class="tab" data-tab="farechart">票价图</button>
+      <button class="tab" data-tab="logs">操作日志</button>
+      <button class="tab" data-tab="settings">系统设置</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Login overlay -->
+    <section id="loginOverlay" class="login-overlay" style="display:none;">
+      <div class="login-card">
+        <div class="login-title">控制台登录</div>
+        <div class="login-row"><input id="loginUser" type="text" placeholder="用户名" /></div>
+        <div class="login-row"><input id="loginPass" type="password" placeholder="密码" /></div>
+        <div class="login-actions">
+          <button id="loginBtn" class="btn primary">登录</button>
+          <span id="loginHint" class="hint" style="margin-left:10px"></span>
+        </div>
+      </div>
+    </section>
+    <!-- Dashboard -->
+    <section id="tab-dashboard" class="tab-panel show">
+      <div class="cards stats-grid">
+        <div class="card">
+          <div class="card-title">车站数量</div>
+          <div class="card-value" id="station-count">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">线路数量</div>
+          <div class="card-value" id="line-count">0</div>
+        </div>
+      </div>
+      <div class="hero"></div>
+      <div class="cards" style="margin-top:12px">
+        <div class="card" style="flex:1">
+          <div class="card-title">按小时统计（最近）</div>
+          <div id="stats-hour" class="list"></div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="card-title">按天统计（最近）</div>
+          <div id="stats-day" class="list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticket Management -->
+    <section id="tab-tickets" class="tab-panel">
+      <div class="section-title">
+        <strong>添加线路</strong>
+        <span class="hint">左键在线路上创建车站；Shift+点击区间在中间插入车站；点击区间可调整票价</span>
+      </div>
+      <form id="line-form" class="toolbar">
+        <input type="text" id="lineId" placeholder="线路ID，如 L1" required />
+        <input type="text" id="lineEn" placeholder="英文名，如 Line1" required />
+        <input type="text" id="lineCn" placeholder="中文名，如 线路1" required />
+        <input type="text" id="lineColor" placeholder="#3366CC 或 orange（支持HEX或名称）" required />
+        <button type="submit">创建线路</button>
+      </form>
+      <div class="toolbar" style="margin-top:4px">
+        <button id="bulkMode" class="btn">批量选择区间</button>
+        <input type="number" id="bulkRegular" placeholder="普通票价" />
+        <input type="number" id="bulkExpress" placeholder="特急票价" />
+        <button id="applyBulk" class="btn primary">应用到选中区间</button>
+      </div>
+      <div id="lines-editor"></div>
+    </section>
+
+    <!-- Fare Chart -->
+    <section id="tab-farechart" class="tab-panel">
+      <div class="section-title">
+        <strong>票价图</strong>
+        <span class="hint">中文为主，英文与编号小字；分普通/特急两张表</span>
+      </div>
+      <div class="toolbar">
+        <button id="showRegular" class="btn primary">显示普通票价图</button>
+        <button id="showExpress" class="btn">显示特急票价图</button>
+        <button id="exportPng" class="btn">导出PNG</button>
+        <button id="exportExcel" class="btn">导出Excel</button>
+      </div>
+      <div class="fare-charts-wrap">
+        <div class="fare-chart" id="chart-regular-wrap">
+          <div class="chart-title">普通（Regular）</div>
+          <div id="fare-chart-regular"></div>
+        </div>
+        <div class="fare-chart" id="chart-express-wrap">
+          <div class="chart-title">特急（Express）</div>
+          <div id="fare-chart-express"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 车票日志 -->
+    <section id="tab-ticketlog" class="tab-panel">
+      <div class="section-title">
+        <strong>车票日志</strong>
+        <span class="hint">同一票号自动聚合；可按票号/站点查询</span>
+      </div>
+      <div class="toolbar">
+        <input id="ticketSearch" type="text" placeholder="输入票号或站点编号进行查询" />
+        <button id="refreshTickets" class="btn">刷新</button>
+      </div>
+      <div class="cards" style="margin-top:8px">
+        <div class="card" style="flex:1">
+          <div class="card-title">票列表（按更新时间倒序）</div>
+          <div id="ticketList" class="list" style="min-height:240px"></div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="card-title">票详情</div>
+          <div id="ticketDetail" class="list" style="min-height:240px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 操作日志（直接集成视图与脚本，无 iframe 套娃） -->
+    <section id="tab-logs" class="tab-panel">
+      <div class="section-title">
+        <strong>操作日志</strong>
+        <span class="hint">分组/时间线视图、IP与类型筛选</span>
+      </div>
+      <div class="toolbar" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <select id="ipFilter" class="input" style="min-width:160px">
+          <option value="">全部 IP</option>
+        </select>
+        <select id="typeFilter" class="input" style="min-width:160px">
+          <option value="">全部类型</option>
+          <option value="login">登录</option>
+          <option value="promotion">促销</option>
+          <option value="export_data">导出</option>
+          <option value="test">测试</option>
+        </select>
+        <input id="logFilter" type="text" class="input" placeholder="关键字（类型或明细）" style="flex:1; min-width:200px;" />
+        <div id="viewToggle" class="btn-group" role="group" aria-label="View">
+          <button data-view="group" class="btn active">分组视图</button>
+          <button data-view="timeline" class="btn">时间线</button>
+        </div>
+        <button id="refreshLogsPage" class="btn">刷新</button>
+      </div>
+      <div id="logsSummary" class="logs-box" style="max-height:none; min-height:240px; overflow:auto; background:var(--card-bg); padding:12px; border-radius:8px;"></div>
+      <div id="logsTimeline" class="logs-box" style="display:none; max-height:none; min-height:240px; overflow:auto; background:var(--card-bg); padding:12px; border-radius:8px;"></div>
+    </section>
+
+    <!-- 系统设置 -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="settings-grid">
+        <div class="setting">
+          <label>API 地址</label>
+          <input id="apiBase" type="text" value="http://192.140.163.241:23333/api" placeholder="请输入API地址" />
+          <button id="saveApiBase">保存</button>
+        </div>
+        <div class="setting">
+          <label>界面模式</label>
+          <select id="colorMode">
+            <option value="dark">深色</option>
+            <option value="light">浅色</option>
+          </select>
+        </div>
+        <div class="setting">
+          <label>数据备份</label>
+          <div class="row">
+            <button id="exportData">导出JSON</button>
+            <label class="import-btn">
+              导入JSON
+              <input id="importData" type="file" accept="application/json" />
+            </label>
+          </div>
+        </div>
+        <!-- 等价站映射已改为自动识别同名站，无需设置 -->
+      </div>
+      
+      <!-- 将优惠设置卡移动到设置页底部，避免与上方内容拥挤 -->
+      <div class="setting">
+        <label>优惠设置（活动 + 折扣）</label>
+        <div class="row">
+          <input id="promoName" type="text" placeholder="活动名称，如 FSE NEW AC" />
+          <input id="promoDiscount" type="number" step="0.01" min="0" max="1" placeholder="折扣系数，如 0.5" />
+          <button id="savePromotion">保存优惠</button>
+        </div>
+        <small>说明：折扣按总费用打折，保留整数（向下取整）。</small>
+      </div>
+    </section>
+  </main>
+
+  <!-- 通用模态 -->
+  <div id="modal" class="modal">
+    <div class="modal-card">
+      <div class="modal-title" id="modal-title"></div>
+      <div id="modal-body"></div>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn">取消</button>
+        <button id="modal-ok" class="btn primary">确定</button>
+      </div>
+    </div>
+  </div>
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- 导出库（CDN）：html2canvas 与 SheetJS -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="main.js"></script>
+  <script src="ticketlog.js"></script>
+  <script src="logs.js"></script>
+</body>
+</html>

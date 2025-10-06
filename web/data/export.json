@@ -1,0 +1,14 @@
+{
+  "config": {
+    "api_base": "http://localhost:23333/api",
+    "current_station": {
+      "name": "Station1",
+      "code": "01-01"
+    }
+  },
+  "stations": [],
+  "lines": [],
+  "fares": [],
+  "stats_ticket": [],
+  "stats_gate": []
+}

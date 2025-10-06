@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ftc铁路运输票务系统 · 操作日志</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="brand">
+    <div class="brand-title">ftc铁路运输票务系统 · 操作日志</div>
+    <nav class="tabs">
+      <a href="index.html" class="tab">返回控制台</a>
+    </nav>
+  </header>
+  <main>
+    <section class="tab-panel show">
+      <div class="section-title">
+        <strong>操作日志</strong>
+        <span class="hint">支持分组/时间线视图、IP与类型筛选</span>
+      </div>
+      <div class="toolbar" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <select id="ipFilter" class="input" style="min-width:160px">
+          <option value="">全部 IP</option>
+        </select>
+        <select id="typeFilter" class="input" style="min-width:160px">
+          <option value="">全部类型</option>
+          <option value="login">login</option>
+          <option value="promotion">promotion</option>
+          <option value="export_data">export_data</option>
+          <option value="test">test</option>
+        </select>
+        <input id="logFilter" type="text" class="input" placeholder="关键字（类型或明细）" style="flex:1; min-width:200px;" />
+        <div id="viewToggle" class="btn-group" role="group" aria-label="View">
+          <button data-view="group" class="btn active">分组视图</button>
+          <button data-view="timeline" class="btn">时间线</button>
+        </div>
+        <button id="refreshLogsPage" class="btn">刷新</button>
+      </div>
+      <div id="logsSummary" class="logs-box"
+        style="max-height:none; min-height:240px; overflow:auto; background:var(--card-bg); padding:12px; border-radius:8px;">
+      </div>
+      <div id="logsTimeline" class="logs-box"
+        style="display:none; max-height:none; min-height:240px; overflow:auto; background:var(--card-bg); padding:12px; border-radius:8px;">
+      </div>
+    </section>
+  </main>
+  <style>
+    .group-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: var(--bg-2)
+    }
+
+    .group-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-right: 6px;
+      color: #fff
+    }
+
+    .badge-login {
+      background: #2eb85c
+    }
+
+    .badge-promotion {
+      background: #f9a825
+    }
+
+    .badge-export {
+      background: #1e88e5
+    }
+
+    .badge-test {
+      background: #8e24aa
+    }
+
+    .badge-default {
+      background: #546e7a
+    }
+
+    .log-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-top: 1px dashed var(--border-color)
+    }
+
+    .log-time {
+      color: var(--text-muted);
+      min-width: 160px
+    }
+
+    .log-ip {
+      color: #607d8b;
+      min-width: 120px
+    }
+
+    .log-detail {
+      white-space: pre-wrap;
+      background: var(--bg-1);
+      padding: 8px;
+      border-radius: 6px;
+      flex: 1
+    }
+
+    .btn-group .btn {
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-group .btn.active {
+      background: var(--accent);
+      color: #fff
+    }
+  </style>
+  <script src="logs.js"></script>
+</body>
+
+</html>

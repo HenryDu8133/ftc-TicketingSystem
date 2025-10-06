@@ -1,0 +1,3 @@
+{"type":"sale","ts":1759649044748,"ip":"127.0.0.1","ticket_id":"TEST-0001","start":"01-01","terminal":"TM-01","train_type":"local","trips_total":3,"station_code":"01-01","station_name":"Station1","cost":50}
+{"type":"status","action":"enter","ts":1759649045165,"ip":"127.0.0.1","ticket_id":"TEST-0001","station_code":"01-01","trips_remaining":2}
+{"type":"status","action":"exit","ts":1759649045369,"ip":"127.0.0.1","ticket_id":"TEST-0001","station_code":"01-02","trips_remaining":1}

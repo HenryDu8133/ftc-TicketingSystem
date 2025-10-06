@@ -1,0 +1,834 @@
+:root {
+  --bg: #000;
+  /* 纯黑底色 */
+  --surface: #000;
+  /* 顶栏/输入区域统一为黑色 */
+  --card: #0b0b0b;
+  /* 卡片/容器稍微提亮 */
+  --card-bg: var(--card);
+  /* 别名，防止未定义导致黑色块 */
+  --border: #1a1a1a;
+  /* 细边框 */
+  --text: #e5e5e5;
+  /* 主文本 */
+  --muted: #9a9a9a;
+  /* 次级文本 */
+  --accent: #3b82f6;
+  /* 统一点缀蓝 */
+  --accent-soft: #2d64c4;
+  /* 悬停加深 */
+  --danger: #ef4444;
+  /* 删除操作红 */
+  --danger-soft: #dc2626;
+  /* 删除悬停加深 */
+  --warning: #f59e0b;
+  /* 警告/风险操作橙 */
+  --warning-soft: #d97706;
+  /* 警告悬停加深 */
+}
+
+/* 浅色模式变量覆盖 */
+body.light {
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --card-bg: var(--card);
+  --border: #e5e7eb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --accent-soft: #1e40af;
+  --danger: #dc2626;
+  --danger-soft: #b91c1c;
+  --warning: #d97706;
+  --warning-soft: #b45309;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif
+}
+
+/* 顶部品牌与标签（极简） */
+.brand {
+  padding: 20px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border)
+}
+
+.brand-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: .2px
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px
+}
+
+.tab {
+  position: relative;
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color .15s ease
+}
+
+.tab:hover {
+  color: var(--text)
+}
+
+.tab.active {
+  color: var(--text)
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -2px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px
+}
+
+main {
+  padding: 24px
+}
+
+.tab-panel {
+  display: none
+}
+
+.tab-panel.show {
+  display: block
+}
+
+/* 仪表盘卡片（统一卡片样式） */
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap
+}
+
+.cards.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px
+}
+
+.cards.stats-grid .card {
+  width: auto
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  width: 300px;
+  min-height: 140px;
+  color: var(--text)
+}
+
+.card-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--muted)
+}
+
+.card-value {
+  font-size: 56px;
+  font-weight: 900;
+  text-align: center;
+  color: var(--text)
+}
+
+.hero {
+  margin-top: 24px;
+  height: 180px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border)
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-weight: 700
+}
+
+.list-item .k {
+  color: var(--muted)
+}
+
+.list-item .v {
+  color: var(--text)
+}
+
+/* 通用次要文本色 */
+.muted {
+  color: var(--muted)
+}
+
+/* 票务管理（减少饱和与渐变） */
+.section-title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 800;
+  margin-bottom: 8px
+}
+
+.hint {
+  color: var(--muted);
+  font-weight: 600
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0
+}
+
+.toolbar input,
+.toolbar select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px
+}
+
+.toolbar input:focus,
+.toolbar select:focus {
+  outline: none;
+  border-color: var(--accent)
+}
+
+.toolbar button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease
+}
+
+.toolbar button:hover {
+  background: var(--accent-soft)
+}
+
+#lines-editor {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 16px;
+  color: var(--text);
+  border: 1px solid var(--border)
+}
+
+.line-svg {
+  width: 100%;
+  height: 96px;
+  margin: 10px 0
+}
+
+.station-label {
+  font-size: 12px;
+  fill: var(--muted)
+}
+
+.fare-label {
+  font-size: 12px;
+  fill: var(--text);
+  font-weight: 800
+}
+
+.segment-hit {
+  cursor: pointer
+}
+
+.segment-selected {
+  fill: rgba(59, 130, 246, .18);
+  stroke: var(--accent);
+  stroke-width: 1
+}
+
+/* 统一SVG配色：线为柔和灰，站点为蓝色点缀 */
+.line-svg line,
+.line-svg path {
+  stroke: #93a2b7 !important;
+  stroke-width: 2
+}
+
+.line-svg circle {
+  fill: var(--accent) !important;
+  stroke: transparent
+}
+
+/* 系统设置 */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px
+}
+
+.setting {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  color: var(--text)
+}
+
+.setting label {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--muted)
+}
+
+.setting input,
+.setting select {
+  width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px
+}
+
+.setting input:focus,
+.setting select:focus {
+  outline: none;
+  border-color: var(--accent)
+}
+
+.setting .row {
+  display: flex;
+  gap: 10px;
+  align-items: center
+}
+
+.setting button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease
+}
+
+.setting button:hover {
+  background: var(--accent-soft)
+}
+
+.import-btn {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer
+}
+
+.import-btn input {
+  display: none
+}
+
+/* 通用模态与Toast（极简） */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #0006;
+  z-index: 1000
+}
+
+.modal.show {
+  display: flex
+}
+
+.modal-card {
+  width: 420px;
+  max-width: 95vw;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  color: var(--text)
+}
+
+.modal-title {
+  font-weight: 900;
+  margin-bottom: 10px
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px
+}
+
+.btn {
+  padding: 9px 13px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer
+}
+
+.btn.primary {
+  background: var(--accent);
+  border: none;
+  font-weight: 800;
+  color: #fff
+}
+
+.btn.primary:hover {
+  background: var(--accent-soft)
+}
+
+.modal input {
+  width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: var(--accent)
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 24px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: none;
+  z-index: 1001
+}
+
+.toast.show {
+  display: block
+}
+
+/* 无障碍：键盘可见焦点 */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px
+}
+
+/* 线路操作区与删除按钮样式 */
+.line-actions {
+  display: flex;
+  gap: 10px;
+  margin: 6px 0 12px 0;
+  flex-wrap: wrap;
+  align-items: center
+}
+
+.line-actions .btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, transform .12s ease, box-shadow .15s ease
+}
+
+.line-actions .btn:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .3)
+}
+
+.line-actions .btn:active {
+  transform: scale(.98)
+}
+
+.btn.danger {
+  background: var(--danger);
+  color: #fff;
+  border: none
+}
+
+.btn.danger:hover {
+  background: var(--danger-soft)
+}
+
+.btn.warning {
+  background: var(--warning);
+  color: #fff;
+  border: none
+}
+
+.btn.warning:hover {
+  background: var(--warning-soft)
+}
+
+/* 票价图（高级简约矩阵） */
+.fare-charts-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 16px
+}
+
+.fare-chart {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  overflow: auto
+}
+
+.chart-title {
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: var(--text)
+}
+
+.fare-grid {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 720px
+}
+
+.fare-grid th,
+.fare-grid td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: center;
+  color: var(--text);
+  vertical-align: middle
+}
+
+.fare-grid thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  font-weight: 800;
+  z-index: 2
+}
+
+.fare-grid thead th:first-child {
+  left: 0;
+  z-index: 3
+}
+
+.fare-grid tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+  font-weight: 800;
+  z-index: 1
+}
+
+.fare-cell {
+  font-weight: 800;
+  border-radius: 8px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .35)
+}
+
+.fare-grid td {
+  position: relative
+}
+
+.line-dots {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  display: flex;
+  gap: 3px
+}
+
+.line-dots .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .18)
+}
+
+.fare-legend {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 8px 0;
+  color: var(--muted)
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 700
+}
+
+/* 票价图表头标签：中文主、英文与编号小字 */
+.label-cn {
+  font-weight: 900;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.1
+}
+
+.label-en {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.1
+}
+
+.label-code {
+  color: #93a2b7;
+  font-size: 11px;
+  line-height: 1.1
+}
+
+/* 匹配主题的滚动条样式 */
+.fare-chart::-webkit-scrollbar {
+  width: 10px;
+  height: 10px
+}
+
+.fare-chart::-webkit-scrollbar-track {
+  background: var(--card);
+  border-radius: 10px
+}
+
+.fare-chart::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px
+}
+
+.fare-chart::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-soft)
+}
+
+/* 登录覆盖层 */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200
+}
+
+.login-card {
+  width: 360px;
+  max-width: 95vw;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  color: var(--text)
+}
+
+.login-title {
+  font-weight: 900;
+  margin-bottom: 10px
+}
+
+.login-row {
+  margin: 8px 0
+}
+
+.login-row input {
+  width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px
+}
+
+.login-row input:focus {
+  outline: none;
+  border-color: var(--accent)
+}
+
+.login-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px
+}
+
+/* 操作日志视图样式（与控制台统一变量） */
+.group-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: var(--card)
+}
+
+.group-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.badge-login {
+  background: #2eb85c;
+  color: #fff
+}
+
+.badge-promotion {
+  background: #f9a825;
+  color: #fff
+}
+
+.badge-export {
+  background: #1e88e5;
+  color: #fff
+}
+
+.badge-test {
+  background: #8e24aa;
+  color: #fff
+}
+
+.badge-default {
+  background: #546e7a;
+  color: #fff
+}
+
+.log-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px dashed var(--border)
+}
+
+.log-time {
+  color: var(--muted);
+  min-width: 160px
+}
+
+.log-ip {
+  color: #607d8b;
+  min-width: 120px
+}
+
+.log-detail {
+  white-space: pre-wrap;
+  background: var(--surface);
+  padding: 8px;
+  border-radius: 6px;
+  flex: 1
+}
+
+.btn-group .btn {
+  border: 1px solid var(--border);
+}
+
+.btn-group .btn.active {
+  background: var(--accent);
+  color: #fff
+}
+
+/* 下拉选择统一样式（含箭头与选项配色） */
+/* 强化选择器，确保所有页面的下拉都生效 */
+select,
+select.input,
+.toolbar select,
+.setting select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 36px 10px 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath fill='%23e5e5e5' d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+select:hover {
+  filter: brightness(1.03)
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent)
+}
+
+select option {
+  background: var(--surface);
+  color: var(--text)
+}
+
+select::-ms-expand {
+  display: none
+}
+
+/* 数字输入：保持基础样式，不再添加自定义箭头 */
+input[type=number] {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+input[type=number]:hover { filter: brightness(1.03) }
+input[type=number]:focus { outline: none; border-color: var(--accent) }

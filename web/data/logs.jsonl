@@ -1,0 +1,2 @@
+{"ts":"2025-10-05T06:44:20.758Z","ip":"127.0.0.1","type":"login","detail":{"user":"admin"}}
+{"ts":"2025-10-05T07:25:13.808Z","ip":"127.0.0.1","type":"update_config_api_base","detail":{"api_base":"http://localhost:23333/api"}}

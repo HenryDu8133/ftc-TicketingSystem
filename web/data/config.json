@@ -1,0 +1,7 @@
+{
+  "api_base": "http://localhost:23333/api",
+  "current_station": {
+    "name": "Station1",
+    "code": "01-01"
+  }
+}

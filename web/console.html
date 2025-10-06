@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ftc铁路运输票务系统·控制台</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="title">ftc铁路运输票务系统·控制台</div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="dashboard">仪表盘</button>
+      <button class="tab" data-tab="ticket">票务管理</button>
+      <button class="tab" data-tab="settings">系统设置</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-dashboard" class="view active">
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-title">车站数量</div>
+          <div class="metric-value" id="stationCount">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">线路数量</div>
+          <div class="metric-value" id="lineCount">0</div>
+        </div>
+      </div>
+      <div class="hero"></div>
+    </section>
+
+    <section id="view-ticket" class="view">
+      <div class="section-title">
+        <span>添加线路器</span>
+        <span class="hint">左键在线路上创建车站，点击区间调整区间票价</span>
+      </div>
+      <div class="line-toolbar">
+        <input id="newLineId" type="text" placeholder="例如 L1" />
+        <input id="newLineColor" type="text" placeholder="#3366CC 或 orange（支持HEX或名称）" />
+        <button id="createLineBtn">新建线路</button>
+      </div>
+      <div id="lineEditor" class="line-editor"></div>
+    </section>
+
+    <section id="view-settings" class="view">
+      <div class="settings-grid">
+        <div class="setting-card">
+          <div class="setting-title">API地址</div>
+          <div class="row">
+            <input id="apiBaseInput" type="text" placeholder="http://192.140.163.241:23333/api" />
+            <button id="saveApiBaseBtn">保存</button>
+          </div>
+          <div class="muted">修改后前端会使用新的API地址。</div>
+        </div>
+        <div class="setting-card">
+          <div class="setting-title">数据导入/导出</div>
+          <div class="row">
+            <button id="exportBtn">导出JSON</button>
+            <label class="file-btn">导入JSON<input id="importFile" type="file" accept="application/json" hidden /></label>
+          </div>
+          <div class="muted">可在此备份或恢复系统数据。</div>
+        </div>
+        <div class="setting-card">
+          <div class="setting-title">危险操作</div>
+          <button id="resetDataBtn" class="danger">清空全部数据</button>
+          <div class="muted">将清空站点、线路与票价。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>后端运行在 <code>/api</code> · 数据保存在 <code>web/data/*.json</code></div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

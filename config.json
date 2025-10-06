@@ -1,0 +1,63 @@
+{
+  "api_base": "http://localhost:8080/api",
+  "current_station": {
+    "name": "Station1",
+    "code": "01-01"
+  },
+  "stations": [
+    { "code": "01-01", "name": "Station1" },
+    { "code": "01-02", "name": "Station2" },
+    { "code": "01-03", "name": "Station3" },
+    { "code": "01-04", "name": "Station4" },
+    { "code": "01-05", "name": "Station5" },
+    { "code": "01-06", "name": "Station6" },
+    { "code": "01-07", "name": "Station7" },
+    { "code": "01-08", "name": "Station8" },
+    { "code": "01-09", "name": "Station9" },
+    { "code": "02-01", "name": "Station1" },
+    { "code": "02-02", "name": "Station2" },
+    { "code": "02-03", "name": "Station3" },
+    { "code": "02-04", "name": "Station4" },
+    { "code": "02-05", "name": "Station5" },
+    { "code": "02-06", "name": "Station6" },
+    { "code": "02-07", "name": "Station7" },
+    { "code": "02-08", "name": "Station8" },
+    { "code": "02-09", "name": "Station9" }
+  ],
+  "lines": [
+    {
+      "id": "L1",
+      "en_name": "Line 1",
+      "cn_name": "线路1",
+      "color": "orange",
+      "stations": ["01-01","01-02","01-03","01-04","01-05","01-06","01-07","01-08","01-09"]
+    },
+    {
+      "id": "L2",
+      "en_name": "Line 2",
+      "cn_name": "线路2",
+      "color": "blue",
+      "stations": ["02-01","02-02","02-03","02-04","02-05","02-06","02-07","02-08","02-09"]
+    }
+  ],
+  "fares": [
+    { "from": "01-01", "to": "01-02", "cost": 1 },
+    { "from": "01-02", "to": "01-03", "cost": 1 },
+    { "from": "01-03", "to": "01-04", "cost": 1 },
+    { "from": "01-04", "to": "01-05", "cost": 2 },
+    { "from": "01-05", "to": "01-06", "cost": 1 },
+    { "from": "01-06", "to": "01-07", "cost": 2 },
+    { "from": "01-07", "to": "01-08", "cost": 1 },
+    { "from": "01-08", "to": "01-09", "cost": 1 },
+    { "from": "02-01", "to": "02-02", "cost": 1 },
+    { "from": "02-02", "to": "02-03", "cost": 1 },
+    { "from": "02-03", "to": "02-04", "cost": 1 },
+    { "from": "02-04", "to": "02-05", "cost": 2 },
+    { "from": "02-05", "to": "02-06", "cost": 1 },
+    { "from": "02-06", "to": "02-07", "cost": 2 },
+    { "from": "02-07", "to": "02-08", "cost": 1 },
+    { "from": "02-08", "to": "02-09", "cost": 1 },
+    { "from": "01-05", "to": "02-05", "cost": 0 },
+    { "from": "02-05", "to": "01-05", "cost": 0 }
+  ]
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>控制台登录</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="brand">
+    <div class="brand-title">ftc铁路运输票务系统 · 登录</div>
+  </header>
+  <main>
+    <section class="login-overlay" style="position:static;background:transparent">
+      <div class="login-card" style="margin:40px auto;">
+        <div class="login-title">控制台登录</div>
+        <div class="login-row"><input id="loginUser" type="text" placeholder="用户名" /></div>
+        <div class="login-row"><input id="loginPass" type="password" placeholder="密码" /></div>
+        <div class="login-actions">
+          <button id="loginBtn" class="btn primary">登录</button>
+          <span id="loginHint" class="hint" style="margin-left:10px"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="login.js"></script>
+</body>
+</html>
