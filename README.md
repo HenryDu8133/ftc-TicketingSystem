@@ -1,21 +1,11 @@
-<!--
- * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @Date: 2025-10-06 09:02:55
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2025-10-06 09:47:25
- * @FilePath: \TicketMachine\README.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
-# FTC Ticketing System (English)
+# FTC Ticketing System
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com) [![Made with Lua](https://img.shields.io/badge/Made%20with-Lua-blue)]() [![CC:Tweaked](https://img.shields.io/badge/CC%3ATweaked-ComputerCraft-blue)](https://tweaked.cc/) [![Node.js 16+](https://img.shields.io/badge/Node.js-16%2B-green)](https://nodejs.org/) [![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red)]() [![Comments: English-only](https://img.shields.io/badge/Comments-English--only-blue)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 This repository provides a ComputerCraft (CC:Tweaked) ticketing solution: a ticket machine and gates, plus a web console for managing stations, lines, fares, and ticket event logs.
 
-Links:
-- English README (this file)
-- Chinese README: see `README_ZH.md`
+[简体中文](https://github.com/HenryDu8133/ftc-TicketingSystem/blob/main/README_ZH.md)
 
 ## Features
 - Ticket machine: UI, audio, printing, floppy TICKET writing, sales stats upload
